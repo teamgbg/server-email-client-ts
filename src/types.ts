@@ -2,8 +2,6 @@
  * @system email
  * @status handwritten
  * @edit edit directly
- *
- * Public types for the email capability primitive.
  */
 
 export interface EmailSendParams {

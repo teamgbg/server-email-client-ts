@@ -2,9 +2,6 @@
  * @system email
  * @status handwritten
  * @edit edit directly
- *
- * Typed ORPC client for the scala-email-sender service.
- * Server-side callers use this to send emails over HTTP.
  */
 
 import { createORPCClient } from "@orpc/client";
