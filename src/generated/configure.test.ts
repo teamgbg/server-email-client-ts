@@ -35,19 +35,26 @@ test("getInternalApiKey reads back what configure() injected", () => {
 	// cannot typecheck: `toBe` is typed against the accessor's declared return,
 	// so a sentinel of any other shape is rejected. This failed in every package
 	// carrying the generated file.
+	const asFound = getInternalApiKey();
 	const injected = { probe: "internalApiKey" };
 	configure({ internalApiKey: injected } as never);
 	expect(getInternalApiKey()).toBe(injected as never);
+	// The suite leaves the module as it found it: bun test runs every file in
+	// ONE process, and a holder left holding the probe poisons every later
+	// suite that reads this accessor.
+	configure({ internalApiKey: asFound } as never);
 });
 
 test("a second configure() replaces what getInternalApiKey returns", () => {
 	// A boot re-run must REPLACE rather than accumulate, or a stale value
 	// survives behind the current one and the accessor reports the wrong
 	// injection with nothing failing.
+	const asFound = getInternalApiKey();
 	const first = { probe: "internalApiKey_first" };
 	const second = { probe: "internalApiKey_second" };
 	configure({ internalApiKey: first } as never);
 	configure({ internalApiKey: second } as never);
 	expect(getInternalApiKey()).toBe(second as never);
 	expect(getInternalApiKey()).not.toBe(first as never);
+	configure({ internalApiKey: asFound } as never);
 });
