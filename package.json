@@ -8,7 +8,7 @@
 	"capability": "Email client surface: typed ORPC client for the email vendor API. The single sanctioned email integration.",
 	"tier": "server",
 	"type": "module",
-	"version": "0.1.3",
+	"version": "0.1.8",
 	"description": "Email client surface: typed ORPC client for the email vendor API. The single sanctioned email integration.",
 	"imports": {
 		"#email-client/*": "./src/*",
